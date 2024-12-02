@@ -59,8 +59,13 @@ import { ContractTransactionResponse } from "ethers";
             status: 0,
             exists: true
           }
+          
+          const signer = await ethers.getSigners();
+          const sender = signer[0];
 
-          await orderTracker.createOrder(newOrder);
+          await expect(orderTracker.createOrder(newOrder)).to.be.emit(orderTracker, "SuccessCreateOrder")
+          .withArgs(100, sender.address);
+
           const orderList = await orderTracker.getListOfOrders();
           const order = await orderTracker.getOrder(100);
           const history = await orderTracker.getOrderHistory(100);
@@ -121,7 +126,11 @@ import { ContractTransactionResponse } from "ethers";
           assert.equal(history.length, 1);
           assert.equal(history[0].status.toString(), "0");
 
-          await orderTracker.updateOrderStatus(id, 1, "Order still on the way");
+          const signer = await ethers.getSigners();
+          const sender = signer[0];
+
+          await expect(orderTracker.updateOrderStatus(id, 1, "Order still on the way")).to.be.emit(orderTracker, "SuccessUpdateOrder")
+          .withArgs(100, sender.address, 1);
           
           const updatedOrder = await orderTracker.getOrder(id);
           const updatedHistory = await orderTracker.getOrderHistory(id);
