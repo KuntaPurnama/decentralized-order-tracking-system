@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 //Error code
 error OrderTracker_OrderNotFound(uint256 packageId);
@@ -65,7 +62,7 @@ contract OrderTracker is Ownable {
     /**
      * @dev creating new order by passing the order struct as paramater and record it in related state variable
      */
-    function createOrder(Order memory order) external {
+    function createOrder(Order memory order) external onlyOwner{
         //New order status can't be any other than Dispatched
         if (order.status != OrderStatus.Dispatched) {
             revert OrderTracker_StatusShouldBeDispatched(order.packageId);

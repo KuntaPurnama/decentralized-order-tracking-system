@@ -8,6 +8,7 @@ import { developmentChains } from "../hardhat-helper-config";
 import { network } from "hardhat";
 
 import { verify } from "../utils/verify";
+import fs from "fs";
 
 const deployTickets: DeployFunction = async function ({
   getNamedAccounts,
@@ -19,7 +20,9 @@ const deployTickets: DeployFunction = async function ({
   const toWei = (num: Number) => ethers.parseEther(num.toString());
   const isLocalNetwork: boolean = developmentChains.includes(network.name);
 
-  log(`---------------------Deploy Order Tracker System --------------------\n`);
+  log(
+    `---------------------Deploy Order Tracker System --------------------\n`
+  );
 
   const contract = await deploy("OrderTracker", {
     from: deployer,
@@ -32,6 +35,9 @@ const deployTickets: DeployFunction = async function ({
     await verify(contract.address, []);
   }
 
+  //write contract address on local json file
+  const addressData = `export const OrderTrackerAddress = '${contract.address}';\n`;
+  fs.writeFileSync("./contract-address.ts", addressData);
   log(`---------------------Deploy Finished --------------------\n`);
 };
 
