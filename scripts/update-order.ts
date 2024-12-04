@@ -25,7 +25,7 @@ async function createOrder() {
     await updateOrderTx.wait(1);
 
     console.log(
-      "========================Finished update order========================"
+      "========================Success update order========================"
     );
   } catch (e) {
     //check if the error comes from the custom error we made, if yes then reconstruct the error message

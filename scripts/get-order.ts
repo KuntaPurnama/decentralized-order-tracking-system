@@ -3,7 +3,7 @@ import { OrderTrackerAddress } from "../contract-address";
 
 async function getOrder() {
   console.log(
-    "=========================Start creating order======================="
+    "=========================Start getting order======================="
   );
   const signers = await ethers.getSigners();
 
@@ -43,7 +43,7 @@ async function getOrder() {
     console.log("Order History Detail: ", orderHistoryDetail);
 
     console.log(
-      "========================Finished create order========================"
+      "========================Success get order========================"
     );
   } catch (e) {
     if (e.toString().includes("reverted with an unrecognized custom error")) {
@@ -53,11 +53,11 @@ async function getOrder() {
       const errorMessage = decodedError?.name;
 
       console.log(
-        "Error when creating the order with custom error: ",
+        "Error when getting the order with custom error: ",
         errorMessage
       );
     } else {
-      console.log("Error when creating the order: ", e);
+      console.log("Error when getting the order: ", e);
     }
   }
 }

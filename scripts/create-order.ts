@@ -29,7 +29,7 @@ async function createOrder() {
     await createOrderTx.wait(1);
 
     console.log(
-      "========================Finished create order========================"
+      "========================Success create order========================"
     );
   } catch (e) {
     if (e.toString().includes("reverted with an unrecognized custom error")) {
