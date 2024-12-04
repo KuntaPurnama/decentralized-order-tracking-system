@@ -1,8 +1,5 @@
 import { ethers } from "hardhat";
 import { OrderTrackerAddress } from "../contract-address";
-import { ErrorDecoder } from "ethers-decode-error";
-
-const errorDecoder = ErrorDecoder.create();
 
 async function createOrder() {
   console.log(
