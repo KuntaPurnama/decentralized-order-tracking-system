@@ -41,6 +41,10 @@ async function getOrder() {
       orderHistoryDetail.push(history);
     }
     console.log("Order History Detail: ", orderHistoryDetail);
+
+    console.log(
+      "========================Finished create order========================"
+    );
   } catch (e) {
     if (e.toString().includes("reverted with an unrecognized custom error")) {
       const decodedError = orderTrackingContract.interface.parseError(
@@ -56,10 +60,6 @@ async function getOrder() {
       console.log("Error when creating the order: ", e);
     }
   }
-
-  console.log(
-    "========================Finished create order========================"
-  );
 }
 
 const convertStatusEnumToString = (status: string) => {

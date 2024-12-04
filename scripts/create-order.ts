@@ -27,6 +27,10 @@ async function createOrder() {
   try {
     const createOrderTx = await orderTrackingContract.createOrder(newOrder);
     await createOrderTx.wait(1);
+
+    console.log(
+      "========================Finished create order========================"
+    );
   } catch (e) {
     if (e.toString().includes("reverted with an unrecognized custom error")) {
       const decodedError = orderTrackingContract.interface.parseError(
@@ -42,10 +46,6 @@ async function createOrder() {
       console.log("Error when creating the order: ", e);
     }
   }
-
-  console.log(
-    "========================Finished create order========================"
-  );
 }
 
 createOrder()

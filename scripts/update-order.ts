@@ -23,6 +23,10 @@ async function createOrder() {
       "Just transit in Jakarta"
     );
     await updateOrderTx.wait(1);
+
+    console.log(
+      "========================Finished update order========================"
+    );
   } catch (e) {
     //check if the error comes from the custom error we made, if yes then reconstruct the error message
     if (e.toString().includes("reverted with an unrecognized custom error")) {
@@ -39,10 +43,6 @@ async function createOrder() {
       console.log("Error when updating the order: ", e);
     }
   }
-
-  console.log(
-    "========================Finished update order========================"
-  );
 }
 
 const convertStringToEnumValue = (status: string) => {
