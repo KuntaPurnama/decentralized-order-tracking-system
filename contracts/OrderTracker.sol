@@ -10,7 +10,7 @@ error OrderTracker_CannotUpdateWithTheSameStatus(uint256 packageId);
 
 /**
  * @title decentralized order tracking system
- * @author Tano
+ * @author Kunta Purnama
  * @notice This contract is to implement secure and seamless decentralized order tracking system
  */
 contract OrderTracker is Ownable {
